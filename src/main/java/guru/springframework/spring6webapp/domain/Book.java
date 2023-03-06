@@ -2,6 +2,7 @@ package guru.springframework.spring6webapp.domain;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -9,12 +10,12 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String titlw;
+    private String title;
     private String isbn;
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns =  @JoinColumn(name = "author_id"))
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 
     public Set<Author> getAuthors() {
         return authors;
@@ -32,12 +33,12 @@ public class Book {
         this.id = id;
     }
 
-    public String getTitlw() {
-        return titlw;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitlw(String titlw) {
-        this.titlw = titlw;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getIsbn() {
@@ -52,7 +53,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
-                ", titlw='" + titlw + '\'' +
+                ", title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", authors=" + authors +
                 '}';
